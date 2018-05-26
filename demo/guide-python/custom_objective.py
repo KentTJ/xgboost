@@ -14,14 +14,14 @@ dtest = xgb.DMatrix('../data/agaricus.txt.test')
 # you must know what you are doing
 param = {'max_depth': 2, 'eta': 1, 'silent': 1}
 watchlist = [(dtest, 'eval'), (dtrain, 'train')]
-num_round = 2
+num_round = 2         
 
 # user define objective function, given prediction, return gradient and second order gradient
 # this is log likelihood loss
 def logregobj(preds, dtrain):
     labels = dtrain.get_label()
     preds = 1.0 / (1.0 + np.exp(-preds))
-    grad = preds - labels
+    grad = preds - labels           //一阶二阶导数需要手动去填写
     hess = preds * (1.0 - preds)
     return grad, hess
 
